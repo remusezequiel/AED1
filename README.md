@@ -15,6 +15,7 @@ GHCI (The Glasgow Haskell Compiller Interactive enviroment)
 2. **Mac** : *brew install haskell-platform*
 
 3. **Windows** : (*[https://www.haskell.org/platform/windows.html] [2]*)
+-----------------------------------------------------------
 
 ##¿Como usar lo que esta en el repo?
 
