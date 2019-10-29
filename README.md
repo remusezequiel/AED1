@@ -1,7 +1,6 @@
 # Haskell-Algebra1
 
-![Logo de Haskell]
-(https://upload.wikimedia.org/wikipedia/commons/1/1c/Haskell-Logo.svg "Haskell Logo")
+![Logo de Haskell](https://upload.wikimedia.org/wikipedia/commons/1/1c/Haskell-Logo.svg "Haskell Logo")
 
 ## Resumen:
 
