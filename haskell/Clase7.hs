@@ -12,6 +12,17 @@ tail :: [a] -> [a]
 (++) :: [a] -> [a] -> [a]
 length :: [a] -> Integer
 
+Para entender que hacen estas funciones predefinidas en el
+prelude de Haskell, abrir una terminal y realizar lo siguiente:
+
+1- head [(1,2), (3,4), (5,2)]
+2- tail [1,2,3,4,4,3,2,1]
+3- [True, True] ++ [False, False]
+4- [1,2] : []
+5- head []
+6- head [1,2,3] : [4,5]
+7- head ([1,2,3] : [4,5])
+8- head ([1,2,3] : [4,5] : [])
 -}
 
 
@@ -60,21 +71,7 @@ newPertenece n lis | length lis == 0 = False
                    | otherwise = newPertenece n (tail lis)
 
 
-------------------------------------------------------------------
-productoria:: [Integer] -> Integer
-productoria ls | length ls == 0 = 1
-               | otherwise = (head ls)*productoria (tail ls)
-------------------------------------------------------------------
-
-------------------------------------------------------------------
-sumarN :: Integer -> [Integer] -> [Integer]
-sumarN n ls | length ls == 0 = []
-            | otherwise = ((head ls)+n) : (sumarN n (tail ls))
-------------------------------------------------------------------
-
-
-
---¿COMO ESCRIBIR LA FUNCION SUMATORIA USANDO PATTERN MATCHING?
+--COMO ESCRIBIR LA FUNCION SUMATORIA USANDO PATTERN MATCHING
 
 sumPattern :: [Integer] -> Integer
 sumPattern [] = 0
@@ -89,15 +86,34 @@ sumPattern (x:xs) = sumPattern xs + x
 -}
 
 
-longitud :: [a] -> 
+longitud :: [a] -> Integer
 longitud [] = 0
 longitud (_:xs) = 1 + longitud xs
 
 --Redefinicion de newPertenece pero en pattern matching
 pertein :: (Eq a) => a -> [a] -> Bool
-pertein [] = 0
+pertein k [] = False
+pertein k (x:xs) | k == x = True
+                 | otherwise = pertein k xs
 
+{- EJERCICIOS :-}
 
+-- Definir la funcion productoria :: [INteger] -> Integer 
+--que devuelve la productoria de los elementos de la lista.
+------------------------------------------------------------------
+productoria:: [Integer] -> Integer
+productoria ls | length ls == 0 = 1
+               | otherwise = (head ls) * productoria (tail ls)
+------------------------------------------------------------------
+
+-- Definir la funcion sumarN :: Integer -> [Integer] -> [Integer]
+-- que dado un numero "n" y una lista ls suman "n" a cada elemneto
+-- de la lista devolviendo una nueva lista con dicho resultado.
+------------------------------------------------------------------
+sumarN :: Integer -> [Integer] -> [Integer]
+sumarN n ls | length ls == 0 = []
+            | otherwise = ((head ls)+n) : (sumarN n (tail ls))
+------------------------------------------------------------------
 
 
 

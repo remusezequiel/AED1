@@ -4,7 +4,7 @@
 
 ## Resumen:
 
-Este repositorio se corresponde con lo visto en el taller correspondiente a la materia **Algebra-1** para *Matematicos* y *Ciencias de la computación*de la UBA. En este se dan las bases de la programacion en (*[Haskell] [1]*), el cual es un lenguage de programación funcional basado el lambda funciones. 
+Este repositorio se corresponde con lo visto en el taller correspondiente a la materia **Algebra-1** para *Matematicos* y *Ciencias de la computación*de la UBA. En este se dan las bases de la programacion en (*[Haskell][1]*), el cual es un lenguage de programación funcional basado el lambda funciones. 
 
 ## Instalacion:
 
@@ -14,10 +14,10 @@ GHCI (The Glasgow Haskell Compiller Interactive enviroment)
 
 2. **Mac** : *brew install haskell-platform*
 
-3. **Windows** : (*[https://www.haskell.org/platform/windows.html] [2]*)
+3. **Windows** : (*[https://www.haskell.org/platform/windows.html][2]*)
 -----------------------------------------------------------
 
-##¿Como usar lo que esta en el repo?
+## ¿Como usar lo que esta en el repo?:
 
 Lo que tenes que hacer para poder ejecutar las funciones de cada archivo es: 
 
@@ -34,5 +34,5 @@ Lo que tenes que hacer para poder ejecutar las funciones de cada archivo es:
 
 
 
-[1]:https://www.haskell.org
-[2]:https://www.haskell.org/platform/windows.html
+[1]: https://www.haskell.org
+[2]: https://www.haskell.org/platform/windows.html
