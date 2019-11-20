@@ -1,0 +1,496 @@
+\documentclass[10pt,journal]{IEEEtran}
+\usepackage[lmargin=2cm, rmargin=2cm, top=1.5cm, bottom=2.5cm]{geometry}
+\usepackage{longtable,multirow,booktabs}
+\usepackage{mathrsfs} % para formato de letra
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[usenames]{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref} 
+\graphicspath{imagenes}
+\title{\bfseries \huge {Trabajo Practico: Circulos de Permutaciones \\ Documentación} }
+\author{
+	\IEEEauthorblockN{Bonino Bianca} 
+	%{|} \IEEEauthorblockA{
+		%Email: ezequielremus@gmail.com}
+\\
+\and
+	\IEEEauthorblockN{Contreras Santiago} 
+	%{|} \IEEEauthorblockA{
+		%Email: ezequielremus@gmail.com}
+\\
+\and
+	\IEEEauthorblockN{Remus Ezequiel} 
+	%{|} \IEEEauthorblockA{
+		%Email: ezequielremus@gmail.com}
+}
+\oddsidemargin=-1cm
+
+\renewcommand{\footrulewidth}{0,01cm}
+\begin{document}
+%\pagestyle{myheadings}
+%TITULO
+%modificar el formato del titulo
+\maketitle
+\newpage
+\tableofcontents
+%\newpage
+\pagestyle{fancy}
+\setlist[description]{
+    style=nextline,
+    labelwidth=0pt,
+    leftmargin=15pt,
+    itemindent=\dimexpr-5pt-\labelsep\relax,
+}
+----------------------------------------------------------------
+\newpage
+%--1
+\section{sonCirculosIguales}
+\subsection{Funciones auxiliares}
+\subsubsection{\color{Red}{longitud}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] [Integer] $->$ Integer 
+        \begin{itemize}
+        
+        \item [o] [Integer] : Representa una lista de numeros enteros a la cual se le contaran los elementos
+        
+        \item [o] Integer : Retorna como valor la cantidad de elementos numericos de la lista
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función recibe una lista como parametro, retornando la cantidad de elementos de la lista. 
+        
+        Como caso base tenemos una lista vacia, a cual al no tener elementos debe retornar $0$. Luego, si la lista tiene elementos suma $1$ al valor de la función llamada por recursión, a la cual se le pasa como parametro la cola de la lista sin el primer elemento.  
+\end{description}
+
+\subsubsection{\color{Red}{circulosIdenticos}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ Circulo $->$ Bool  
+        \begin{itemize}
+        \item [o] Circulo: Primer circulo a comparar con el segundo 
+        \item [o] Circulo: Segundo circulo a comparar con el primero
+        \item [o] Bool: La funcion devuelve \textit{False} se no son circulos idénticos elemento a elemento y devuelve \textit{True} si son idénticos elemento a elemento
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función toma dos parametros de tipo \textit{Circulo} compara si son completamente identicos. Si lo son retorna True si no Retorna False.  
+        
+        Como caso base, se toman dos Circulos vacios. Al ser ambos vacios devolvera \textit{True}. Al pasarle dos listas evalua si las cabezas de los circulos son iguales, si se cumple llama a si misma pasandose las colas de ambos circulos. Si esto no se cumple devuelve \textit{False}. 
+\end{description}
+
+
+\subsubsection{\color{Red}{circulosIgualesAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ Circulo $->$ Bool 
+        \begin{itemize}
+        \item [o] Circulo : Primer circulo a comparar
+        \item [o] Circulo : Segundo circulo a comparar
+        \item [o] Bool : Devuelve True si los círculos son idénticos o iguales por rotación
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]Esta función toma dos círculos y los compara para saber si son idénticos o iguales por rotación.
+        
+        Como caso base, si las cabezas de los círculos son iguales, llama a la función \textit{circulosIguales} previamente definida. Si las cabezas no son iguales se hace una llamada recursiva a la función pasando al Primer circulo y a la lista conformada por la cola de la segunda lista sumandole la cabeza al final. Es decir, si $(y:ys)$ era $[1,2,3,4]$, entonces $(ys ++ y)$ es $[2,3,4,1]$.
+        
+    
+\end{description}
+
+\subsection{Función Obligatoria}
+\subsubsection{\color{Red}{sonCirculosIguales}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ Circulo $->$ Bool  
+        \begin{itemize}
+        \item [o]  Circulo :Primer Circulo a Comparar
+        \item [o]  Circulo :Segundo Circulo a Comparar
+        \item [o]  Bool : Devuelve \textit{True} si los circulos son identicos o iguales por rotación y \textit{False} si no lo son.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]  Esta función compara dos parámetros tipo circulo con la intención de saber si cumplen con la condición de ser círculos de permutación.
+        
+        Como caso base, si los circulos no tienen elementos, entonces son iguales, por lo que devuelve \textit{True}. Si las listas no son vacias, entonces se fija si las longitudes son iguales, si lo son se fija si estas listas cumplen con la condición dada por la función \textit{circulosIgualesAux}. Si sus longitudes no son iguales entonces devuelve \textit{False}.  
+\end{description}
+
+%--2
+\section{permutaciones}
+\subsection{Funciones auxiliares}
+\subsubsection{\color{Red}{cambiarAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Integer $->$ [Integer] $->$ [Integer] 
+        \begin{itemize} 
+        \item [o]  Integer : Entero perteneciente a la lista a cambiar. 
+        \item [o]  Integer : Numero por el cual se va a cambiar al elemento de la lista.  
+        \item [o] [Integer] : Lista de enteros a revisar.
+        \item [o] [Integer] : Lista modificada.       
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta funcion cambia al primer numero $n$ coincidente con la cabeza de la lista y lo cambia por el numero $m$. 
+        
+        Como caso base, se toma que si la lista es vacia, al no tener elementos va a retornar una lista vacia. Luego, si tiene elementos, analiza si el primer parametro pasado coincide con el primer elemento de la lista, si es asi realiza el cambio ($m:xs$), sino coinciden, entonces agrega la cabeza de la lista a la llamada por recursión de la función a al cual se le pasan los dos primeros elementos originales y el resto de los elementos de la lista no analizados (\texttt{cambiarAux n m xs})  
+        
+\end{description}
+
+\subsubsection{\color{Red}{cambiar}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Integer $->$ [[Integer]] $->$ [[Integer]]
+        \begin{itemize} 
+        \item [o]  Integer : Entero perteneciente a la lista a cambiar. 
+        \item [o]  Integer : Numero por el cual se va a cambiar al elemento de la lista.  
+        \item [o] [[Integer]] : Lista de listas de enteros a la cual se le cambiaran los elementos 
+        \item [o] [[Integer]] : Lista de listas de elementos final con elementos cambiados 
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Utiliza \textit{cambiarAux} para cambiar al primer numero $n$
+  que encuentra en las listas por el numero $m$. Solo 
+  cambia el primer n, si existen 2 n solo cambia el primero.
+  
+  Como caso base, si la lista esta vacia, devuelve una lista vacia, ya que no existen elementos iguales a los que se les vayan a pasar. Luego, si la lista tienen elementodos llama a \textit{cambiarAux} pasandose los primeros dos parametros ($n$ y $m$) y la lista que conforma a la cabeza de la lista de listas y al resultado se le agregara la llamada recursiva de la funcion pasandose la cola de la lista de listas. (\texttt{cambiarAux n m x : cambiar n m xs})
+    
+\end{description}
+
+\subsubsection{\color{Red}{agregar}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ [[Integer]] $->$ [[Integer]]
+        \begin{itemize} 
+        \item [o]   Integer : Entero a agregar a la cabeza de cada lista
+        \item [o] [[Integer]] : Lista de listas a las cuales se le va a agregar el elemento del pirmer parametro
+        \item [o] [[Integer]] : Lista de listas final, con los elementos agregados
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta funcion toma al entero $n$ y a la lista ($x:xs$), lo que hace es agregar en la cabeza de cada elemento de la lista de listas al elemento $n$.
+        
+        Como caso base, si la lista esta vacia retorna una lista vacia, ya que no tiene elementos. Luego, si la lista tiene un elemento o mas entonces toma a la lista correspondiente a la cabeza de la lista y le agrega el elemento $n$ ($[n:x]$) y a este elemento lo pone conjuntamente dentro de una lista a la cual se le agregaran las llamadas recursivas de la funcion a la cual se le pasara el numero a agregar en cada lista y la cola de la lista de listas original.   
+\end{description}
+
+\subsubsection{\color{Red}{permutacionesAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ [[Integer]] $->$ [[Integer]]
+        \begin{itemize} 
+        \item [o]  Integer : Elemento agregado a la lista
+        \item [o] [[Integer]] : Lista a la cual se le agregaran los n elementos.
+        \item [o] [[Integer]] : Lista de listas final
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función agrega el elemento $n$ primero a la lista y lo une con 
+la llamada recursiva pasandose el numero anterior a $n$ 
+y la lista obtenida tras cambiar al numero anterior a 
+$n$ por $n$ en la lista pasada como parametro originalmente. 
+
+Como caso base, si se le agrega ele elemento cero a la lista, esta devuelve una lista vacia, esto es porque $n$ debe corresponderse con un número natural. Luego, si n es distinto de $0$, se agrega el elemento $n$ a la lista ($xs$) y se lo agrega a una lista de listas llamando por recursion a la función pasandose como parametros al numero anterior $(n-1)$ y como segundo parametro se realiza el cambio , mediante la funcion \textit{cambiar} del elemento $n-1$ por el elemento $n$ en la lista.
+\end{description}
+
+
+\subsection{Función Obligatoria}
+\subsubsection{\color{Red}{permutaciones}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ [[Integer]]  
+        \begin{itemize}
+        \item [o]  Integer : Numero de orden de la lista de números
+        \item [o] [[Integer]] : Lista de listas de enteros de $n$ elementos permutados. 
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función crea una lista con todas las permutaciones posibles de las listas de orden $n$.
+        
+ Realiza una llamada de permutacionesAux de n pasandose como 
+parametro de lista a la llamada recursiva de permutaciones $(n-1)$
+dando una llamada recursiva de permutacionesAux n (permutacionesAux $(n-1)$)   
+\end{description}
+
+%--3
+\section{esCirculoPrimo}
+\subsection{Funciones auxiliares}
+\subsubsection{\color{Red}{divisoresHasta}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Integer $->$ [Integer]
+        
+        \begin{itemize} 
+        \item [o]  Integer : Numero a saber la cantidad de divisores
+        \item [o]  Integer : Numero por el cual vas a dividir el primer numero
+        \item [o] [Integer] : Lista de con los divisores del primer numero respecto del numero pasado como segundo parametro
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función toma como base que cualquier numero dividido por uno tiene como único divisor al uno, por lo que en el caso de que como segundo parametro se le pase un $1$ se devolvera un $[1]$. Si el segundo parametro es distinto de $1$, entonces se fija primero si el resto de la división por el numero pasado da cero, si es así se agrega este elemento a una lista formada por este y los elementos que cumplan la llamada recurciva de la función. Si no es divisor entonces se hace una llamada recursiva pasandose como segundo parametro al numero anterior al numero original pasado (es decir $n-1$).
+\end{description}
+
+\subsubsection{\color{Red}{esPrimo}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Bool
+        
+        \begin{itemize} 
+        \item [o]  Integer : Numero el cual se quiere saber si es o no primo
+        \item [o] Bool : Devuelve \textit{True} si el numero pasado como parametro es primo.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función cuenta la cantidad de divisores de la lista realizada por la funcion \textit{divisoresHasta}. Si esta lista solo tiene 2 elementos, entonces devolvera \textit{True}.  
+\end{description}
+
+
+\subsubsection{\color{Red}{circuloPrimoAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Circulo $->$ Bool
+        
+        \begin{itemize} 
+        \item [o] Integer : Un numero cualquiera
+        \item [o] Circulo : Un circulo cualquiera
+        \item [o] Bool : Si es un circulo primo devuelve True.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]  Esta funcion toma como caso base el de un entero cualquiera y un circulo de orden 1, en tal caso se fija si la suma de ambos elementos es primo. 
+
+Si el circulo pasado como segundo parametro tiene un orden mayor a dos, entonces  se fija si la cabeza del circulo mas la cabeza de la cola del circulo son primos, si es verdadero llama a la recurcion pasando el elementro original como primer parametro y la cola del circulo como segundo parametro. Si este paso es falso, entonces devuelve \textit{False}
+\end{description}
+
+
+
+\subsection{Función Obligatoria}
+\subsubsection{\color{Red}{esCirculoPrimo}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}]  Circulo $->$ Bool
+        \begin{itemize}
+        \item [o]  Circulo : Circulo al cual se lo somete a las condiciones de ser un circulo primo.
+        \item [o]  Bool : Devuelve \textit{True} si el circulo es primo.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Lo unico que hace esta funcion es llamar a la funcion circuloPrimoAux pasandole como parametros la cabeza del circulo y el circulo completo.   
+\end{description}
+
+%--4
+\section{estaRepetidoPrimero}
+\subsection{Funciones auxiliares}
+\subsubsection{\color{Red}{estaRepetidoPrimeroAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ [Circulo] $->$ Bool 
+        \begin{itemize} 
+        \item [o]  Circulo : Circulo el cual se quiere saber si esta en una lista de Circulos
+        \item [o] [Circulo] : Lista de Circulos sobre el cual se quiere saber si el primer circulo esta repetido 
+        \item [o] Bool : Devuelve \textit{True} si el primer circulo esta incluido en la lista de circulos
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Como caso base le llegan un circulo y una lista con solo un elemento yse someten a las condiciones de la funcion \textit{sonCirculosIguales}.
+        
+        Luego, si entra un circulo y una lista de circulos con mas de un elemento, se divide en dos casos, nos fijamos primero si el circulo y la cabeza del circulo son iguales, si lo son quiere decir que el circulo esta dentro de la lista, por lo que devuelve \textit{True}, sino, como la lista es extensa se hace una llamada recursiva de la función pasandose como parametro el circulo el cual se quiere saber si esta en la lista y la cola de la lista de circulos.   
+\end{description}
+
+\subsection{Función Obligatoria}
+\subsubsection{\color{Red}{estaRepetidoPrimero}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] [Circulo] $->$ Bool 
+        \begin{itemize}
+        \item [o]  [Circulo] : Lista de circulos
+        \item [o]  Bool : Devuelve \textit{True} si el primer circulo esta incluido mas de una vez en la lista.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta funcion se fija si el primer elemento de la lista de circulos esta repetido dentro de dicha lista.
+        
+        Para esto, toma como caso base que, si la lista tiene solo un elemento la función devolvera \textit{False}, ya que existe un unico elemento en la lista. Luego, si la lista tiene mas de un elemento llama a la función \textit{estaRepetidoPrimeroAux} pasandole como primer parametro a la cabeza del circulo (primer cierculo) y como segundo parametro a la lista de circulos que quedan dentro de la lista. (Ver funcionamiento de \textit{estaRepetidoPrimeroAux}).
+\end{description}
+
+
+%--5
+\section{listaCirculosPrimos}
+\subsection{Funciones auxiliares}
+\subsubsection{\color{Red}{listaCircAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] [Circulo] -> [Circulo]
+        \begin{itemize} 
+        \item [o]  [Circulo] : Lista de circulos sometidas a condiciones
+        \item [o]  [Circulo] : Retorna una lista de circulos primos
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]   Esta función se fija dentro de una lista de circulos pasada como parametro, que circulos cumplen con la condicion de ser circulos primos.
+        
+        Como caso base toma que si el circulo esta vacio, entonces no habra circulos primomos, por ende devuelve la lista vacia. Luego, se llama a las funciones \textit{estaRepetidoPrimer}, a la cual se le pasa la lista completa y \textit{esCirculoPrimo}, a la cual se le pasa solo la cabeza, si se cumple  una o la otra entonces hace un llamado recursivo de la función  pasandole la cola de la lista de circulos. Si no se cumple ninguna, entonces se le agrega la cabeza de la lista al llamado recursivo de la funcion pasandose la cola de la lista como parametro.
+\end{description}
+
+\subsection{Función Obligatoria}
+\subsubsection{\color{Red}{listaCirculosPrimos}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ [Circulo]  
+        \begin{itemize}
+        \item [o]  Integer : Numero de elementos que deben tener los cirulos
+        \item [o] [Circulos] : Retorna una lista. Vacia si no tiene circulos primos, con elementos si los tiene.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]  Esta función recive un entero que representa el orden de los circulos que conformaran a la lista. Estos circulos seran todas las permutaciones posibles de orden   $n$, dentro de este se evalua cuales son primos y se los guarda en una lista que sera el retorno de la función.
+        
+        Basicamente, lo que hace esta funcion es, tomar el numero entero y pasarcelo a la función \textit{listaCircAux} a la cual se le pasara como parametro a la lista de permutaciones de orden $n$. 
+\end{description}
+
+%--6
+\section{contarCirculosPrimos}
+\subsection{Funciones auxiliares}
+\subsubsection{\color{Red}{longitud1}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] [Circulo] $->$ Integer
+        \begin{itemize} 
+        \item [o]  [Circulo] : Lista de circulos  
+        \item [o]   Integer : Retorna la cantidad de elementos
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]   Esta funcion cuenta la cantidad de circulos dentro de una lista de circulos. Su funcionamiento es similar a la funcion \textit{longCirculos}. 
+        
+        Toma como caso base que si la lista no tiene elementos, devuelve $0$. Luego, si tiene elementos se le suma uno a la llamada recursiva passandole solo la cola de la lista de circulos.
+\end{description}
+
+\subsection{Función Obligatoria}
+\subsubsection{\color{Red}{contarCirculosPrimos}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Integer   
+        \begin{itemize}
+        \item [o] Integer : Numero del orden de la lista de circulos a analizar  
+        \item [o] Integer : Devuelve la cantidad de circulos primos de orden $n$ posibles
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función cuenta la cantidad de circulos primos de orden $n$.
+        
+        Para esto se le pasa a la función el orden de los circulos y lo que hace es contar mediante la función \textit{longitud1} el resultado de pasarle como parametro el orden a la funcion \textit{listaCIrculosPrimos}.    
+\end{description}
+
+%--7
+\section{Optativo}
+\subsection{Funciones auxiliares}
+\subsubsection{\color{Red}{ultimoElemento}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ Integer
+        \begin{itemize} 
+        \item [o]  Circulo : Circulo del cual se quiere conocer el ultimo elemento de la lista
+        \item [o] Integer : Entero que representa al ultimo elemento del circulo.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta funcion toma un tipo circulo como parametro y retorna el ultimo elemento de la lista.
+        
+        Como caso base, toma a un circulo con un solo elemento, devolviendose asi ese unico elemento presente en el circulo. Luego, si el circulo tiene mas de un elemento, entonces se hace una llamada recursiva pasandose la cola del circulo pasado como parametro.     
+\end{description}
+
+\subsubsection{\color{Red}{circuloInverso}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ Circulo
+        \begin{itemize} 
+        \item [o] Circulo : Circulo el cual se quiere invertir
+        \item [o] Circulo : Circulo inverso al pasado como parámetro
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta función toma como parametro un Circulo y devuelve su circulo inverso. 
+        
+        Como caso base se toma a ia lista vacia, la cual al no tener elementpo devuelve dicha lista vacia. Luego, si la lista tiene elementos, entonces se hace una llamada recursiva a la funcion pasandose como parametro  la cola de la lista y a eso se le sumara la cabeza de la cola. 
+\end{description}
+
+\subsubsection{\color{Red}{circulosEspejadosAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Circulo $->$ Circulo $->$ Bool
+        \begin{itemize} 
+        \item [o] Integer : Representa al ultimo numero del circulo pasado como parametro. 
+        \item [o] Circulo : Primer circulo a ser comparado
+        \item [o] Circulo : Segundo circulo a ser comparado
+        \item [o] Bool : Devuelve \textit{True} si son espejados.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}] Esta funcion se fija si los circulos son espejados por simetria respecto del entero que le pases como primer parametro o s. En particular, el entero pasado como parametro, si son circulos espejados, entonces deberia corresponderse con el ultimo elemento del segundo circulo.
+        
+        Como caso base si la cabeza del primer circulo coincide con el numero pasado como parametro (que representa al ultimo numero de la lista), si es asi se fija si un circulo es el inverso del otro. Si el entero no coincide con la cabeza de la primer lista, entonces hace una llamada recursiva, pasando como segundo parametro al circulo formado por anteponer la cola del circulo a la cabeza, es decir, si el circulo original era $[a,b,c,d]$ el parametro pasado como recursividad sera $[b,c,d,a]$.
+\end{description}
+
+\subsubsection{\color{Red}{sonCirculosEspejados}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ Circulo $->$ Bool
+        \begin{itemize} 
+        \item [o] Circulo : Primer circulo a ser comparado  
+        \item [o] Circulo : Segundo circulo a ser comparado
+        \item [o] Bool : Devuelve \textit{True} si son circulos de permutacion espejados.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]  Esta función compara dos circulos con el proposito de saber si son simetricos o rotaciones uno del otro. 
+        
+        Primero se fija si las longitudes de los circulos son iguales. Si lo son, entonces utiliza la funcion \textit{circulosEspejadosAux} pasando como entero al ultimo elemento del segundo circulo y al primer circulo como segundo parametro y el segundo circulo como tercer parametro. Si no son de igual longitud, entonces devuelve \textit{False}. 
+\end{description}
+
+
+\subsubsection{\color{Red}{sonCirculosIgualesOEspejados}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ Circulo $->$ Bool
+        \begin{itemize} 
+        \item [o] Circulo : Primer circulo a ser comparado  
+        \item [o] Circulo : Segundo circulo a ser comparado
+        \item [o] Bool : Devuelve \textit{True} si son circulos de espejados o iguales.
+        \end{itemize}              
+        \item[\color{Green}{Descripción}] Esta funcion lo que hace es tomar dos listas y evaluar mediante las funciones \textit{sonCirculosIguales} y \textit{sonCirculosEspejados}. Esto lo hace fijandose si se cumple una u otra condicion mediante el comparador logico \textit{or}.   
+\end{description}
+
+\subsubsection{\color{Red}{repetidoPrimeroEspejadosAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Circulo $->$ [Circulo] $->$ Bool
+        \begin{itemize} 
+        \item [o]   Circulo : Circulo a evaluar
+        \item [o]  [Circulo] : Lista de circulos
+        \item [o]  Bool : Devuelve \textit{True} si el circulo del primer parametro esta dentro de la lista.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]   Esta funcion toma al circulo del primer parametro y evalua si pertenece a la lista de circulos, con la posibilidad de que este espejado dentro de la lista de circulos. 
+        
+        Como caso base tenemos a una lista de circulos con un solo elemento, en ese caso evalua a los circulos mediante la funcion \textit{sonCirculosIgualesOEspejados}. Luego, si la lista de circulos tiene mas de un elemento, entonces primero evalua si el primer elemento de la lista coincide con el circulo pasado, si es asi devuelve \textit{True}, sino toma un paso recursivo pasando el circulo a saber si esta repetido y la cola de la lista de circulos.
+\end{description}
+
+
+
+\subsubsection{\color{Red}{estaRepetidoPrimeroEspejados}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] [Circulo] $->$ Bool
+        \begin{itemize} 
+        \item [o]  [Circulo] : Lista de Circulos
+        \item [o]  Bool : Devuelve True si el primer elemento del circulo esta repetido dentro de la lista de circulos
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]   Esta funcion revisa si el primer elemento de la lista de circulos esta repetido, siendo posible que pueda encontrarse como un circulo espejado. 
+        
+        Como caso base toma que si la lista de circulos tiene solo un elemento, entonces al haber solo un elemento no existira ninguno con el cual comparar por lo que retorna \textit{False}. Luego, si la lista de circulos tiene mas de un elemento se llama a la funcion \textit{repetidoPrimeroEspejadosAux} pasandose como parametro el primer circulo de la lista como primer parametro y como segundo parametro la cola restante de la lista de circulos.
+\end{description}
+
+\subsubsection{\color{Red}{lisCircPrimosEspejadosAux}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] [Circulo] $->$ [Circulo]
+        \begin{itemize} 
+        \item [o]  [Circulo] : Lista a evaluar
+        \item [o]  [Circulo] : Retorna la lista con solo los elementos primos de la lista pasada como parámetro.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]   Esta funcion se fija dentro de los elementos de la lista de circulos
+ cuelaes estan repetidos o no son primos y los descarta, 
+ dejando solo la lista de circulos primos de la lista.
+ 
+ Como caso base, si la lista esta vacia, entonces devuelve una lista vacia. Luego, si la lista no esta vacia evalua mediante las funciones \textit{estaRepetidoPrimeroEspejados} si el elemento esta repetido en alguna de sus formas y con la funcion \textit{esCirculoPrimo} negada, ya que lo comparamos con un \textit{or}, si se cumple esta condicion entonces hace recursividad llaamandose a si misma pasandose la cola de la lista de Circulos. Si no se cumple dicha condición, entonces a al elemento le agrega la recurcion sobre la cola de la lista.  
+\end{description}
+
+\subsubsection{\color{Red}{listaCirculosPrimosEspejados}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ [Circulo]
+        \begin{itemize} 
+        \item [o]  Integer : Numero de orden de los circulos de la lista
+        \item [o] [Circulo] : Retorna una lista solo con los circulos Primos espejados de orden del Integer pasado.
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]   Esta función toma un entero como parametro que refleja el orden de los circulos de la lista a tener en cuenta, compara si alguno es primo espejado y devuelve la lista solo con dichos elementos.
+        
+        Al integer pasado lo pasa a la funcion \textit{lisCircPrimosEspejadosAux} a la cual le pasa como parametro la lista conformada por las permutaciones de orden n.
+\end{description}
+
+\subsection{Función Optativa}
+\subsubsection{\color{Red}{contarCirculosPrimos}}
+\begin{description}[style=nextline]
+        \item[\color{Green}{Signatura}] Integer $->$ Integer   
+        \begin{itemize}
+        \item [o]  Integer : Orden de los elementos de la lista
+        \item [o]  Integer : Cantidad de elementos primos espejados de orden $n$
+        \end{itemize}        
+        
+        \item[\color{Green}{Descripción}]  Esta funcion cuenta la cantidad de elementos de orden $n$ que son primos espejados.
+        
+        Esta función utiliza la funcion \textit{longitud1} pasandole como lista parametro  la lista resultante de pasarle el orden $n$ a la función \textit{listaCirculosPRimosEspejados}.
+\end{description}
+
+\end{document}

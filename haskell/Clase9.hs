@@ -36,11 +36,22 @@ alter_mcd a b = mcd b (mod a b)
 
 
 ------------------------------------------------------------
+longitud :: [Integer] -> Integer
+longitud [] = 0
+longitud (x:xs) = 1 + longitud xs
+
+
 listaDivisores :: Integer -> Integer -> [Integer]
 listaDivisores n y | y == n = [n]
                    | mod n y == 0 = y : listaDivisores n (y + 1)
                    | otherwise = listaDivisores n (y + 1)
+
+esPrimo :: Integer -> Bool
+esPrimo n | longitud (listaDivisores n 1) == 2 = True
+          | otherwise = False
+
 ------------------------------------------------------------
+
 
 ------------------------------------------------------------
 mcd_Hasta :: Integer -> Integer -> Integer -> Integer
@@ -72,7 +83,7 @@ solucionParticular a b m | tieneSolucion a m b = x * (div b g)
                            where (g, x, k) = emcd a m  
                          
 --solucionGeneral :: Integer -> Integer -> Integer -> (Integer, Integer)
---solucionGeneral a b m = (solucionParticular a b m , b * (div) )
+--solucionGeneral a b m = (solucionParticular a b m , div m () )
 
 
 

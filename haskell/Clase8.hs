@@ -29,7 +29,7 @@ agregarC x xs | perteneceC x xs = xs
               | otherwise = (x:xs)
 
 agregarATodos :: Integer -> Set (Set Integer) -> Set (Set Integer)
-agregarATodos x []= []
+agregarATodos x [] = []
 agregarATodos x (xs:ys) | pertenece x xs  = xs:agregarATodos x ys
                         | not(pertenece x xs)  = agregarC (agregar x xs) (agregarATodos x ys)
 
