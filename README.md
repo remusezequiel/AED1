@@ -36,3 +36,5 @@ Lo que tenes que hacer para poder ejecutar las funciones de cada archivo es:
 
 [1]: https://www.haskell.org
 [2]: https://www.haskell.org/platform/windows.html
+
+## Instalacion Python:

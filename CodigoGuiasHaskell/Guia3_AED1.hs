@@ -2,6 +2,7 @@ import System.Win32 (SECURITY_ATTRIBUTES(bInheritHandle), cOLOR_ACTIVEBORDER)
 import GHC.ResponseFile (escapeArgs)
 {- GUIA 3 :  ALGORITMOS Y ESTRUCTURA DE DATOS 1 -}
 
+-----------------------------------------------------------------------------------------------------------------------------------
 {-  EJERCICIO 1:
     a)Implementar la función parcial f :: Integer -> Integer definida por extensión de la siguiente manera:
         f(1)=8 ; f(4)=131 ; f(16)=16 
@@ -40,6 +41,7 @@ h n = f (g n)
 k :: Integer -> Integer
 k n = g (f n)
 
+-----------------------------------------------------------------------------------------------------------------------------------
 {- Ejercicio 2. ⋆ Especificar e implementar las siguientes funciones, incluyendo su signatura.
     a) absoluto: calcula el valor absoluto de un número entero.
     b) maximoabsoluto: devuelve el máximo entre el valor absoluto de dos números enteros.
@@ -104,7 +106,7 @@ digitoUnidades n = mod (absoluto n) 10
 digitoDecenas :: Integer -> Integer
 digitoDecenas n = digitoUnidades (div n 10)
 
-
+-----------------------------------------------------------------------------------------------------------------------------------
 {-Ejercicio 3. Implementar una función 
 
     estanRelacionados :: Integer ->Integer ->Bool
@@ -123,6 +125,7 @@ estanRelacionados a b
     | mod a b == 0 =  True
     | otherwise = False
 
+-----------------------------------------------------------------------------------------------------------------------------------
 {- Ejercicio 4.⋆ Especificar e implementar las siguientes funciones utilizando tuplas para representar pares, ternas de números.
 
     a) prodInt: calcula el producto interno entre dos tuplas R × R. 
@@ -256,20 +259,66 @@ invertir (x, y) = (y, x)
 
     -}
 
-{-Ejercicio 5. Implementar la funci´on todosMenores :: (Integer, Integer, Integer) ->Bool
+{-Ejercicio 5. Implementar la función todosMenores :: (Integer, Integer, Integer) ->Bool
     problema todosMenores (t : Z × Z × Z) : Bool {
         requiere: {True}
         asegura: {(res = true) ↔ ((f(t0) > g(t0)) ∧ (f(t1) > g(t1)) ∧ (f(t2) > g(t2)))}
     }
-    problema f (n: Z) : Z {
+    problema f_ej5 (n: Z) : Z {
         requiere: {True}
         asegura: {(n ≤ 7 → res = n2) ∧ (n > 7 → res = 2n − 1)}
     }
-    problema g (n: Z) : Z {
+    problema g_ej5 (n: Z) : Z {
         requiere: {True}
         asegura: {Si n es un n´umero par, entonces res = n/2, en caso contrario, res = 3n + 1}
     }
 -}
+
+esNumeroPar :: Integer -> Bool
+esNumeroPar n 
+    | mod (absoluto n) 2 == 0 = True
+    | otherwise = False
+
+f_ej5 :: Integer -> Integer
+f_ej5 n 
+    | n <= 7 = n * n
+    | otherwise = 2 * n - 1
+
+g_ej5 :: Integer -> Integer
+g_ej5 n 
+    | esNumeroPar n == True = div n 2
+    | otherwise = 3 * n + 1 
+
+todosMenores :: (Integer, Integer, Integer) -> Bool
+todosMenores (t1, t2, t3)
+    | (f_ej5 t1 > g_ej5 t1) && (f_ej5 t2 > g_ej5 t2) && (f_ej5 t3 > g_ej5 t3) = True
+    | otherwise = False
+
+
+{- Ejercicio 6. Usando los siguientes tipos:
+type Anio = Integer
+type EsBisiesto = Bool
+
+Programar una función bisiesto :: Anio -> EsBisiesto según la siguiente especificaci´on:
+    problema bisiesto (año: Z) : Bool {
+        requiere: {True}
+        asegura: {res = false ↔ año no es múltiplo de 4, o a˜no es múltiplo de 100 pero no de 400}
+    }
+
+Por ejemplo:
+bisiesto 1901 ⇝ False, bisiesto 1904 ⇝ True,
+bisiesto 1900 ⇝ False, bisiesto 2000 ⇝ True.
+
+-}
+
+type Anio = Integer
+type EsBisiesto = Bool
+
+bisiesto :: Anio -> EsBisiesto
+bisiesto n 
+    | not (esMultiploDe n 4) || ( esMultiploDe n 100 && not(esMultiploDe n 400)) = False
+    | otherwise = True
+
 
 
 
